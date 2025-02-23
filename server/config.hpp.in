@@ -1,0 +1,8 @@
+#ifndef CONFIG_HPP
+#define CONFIG_HPP
+
+#define MODEL_PATH "@MODEL_PATH@"
+#define ENV_PATH "@ENV_PATH@"
+#define DEVELOPER_MODE @DEVELOPER_MODE@
+
+#endif // CONFIG_HPP
