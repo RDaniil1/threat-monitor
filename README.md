@@ -3,7 +3,6 @@
 The internal threats monitoring system based on the network traffic and user activity prediction.
 
 > [!WARNING]
-
 > This program is a prototype, and used for showing basic functionality, not intended to be used in production.
 
 ## Contents
