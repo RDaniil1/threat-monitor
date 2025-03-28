@@ -22,7 +22,8 @@ file(
         "${PROJECT_SOURCE_DIR}/src/**"
         HEADERS "${PROJECT_SOURCE_DIR}/include")
 
-add_compile_options(-DUSE_ARMA -Wno-deprecated -Wno-narrowing -Wno-conversion-null)
+add_compile_options(-DUSE_ARMA -Wno-deprecated -Wno-narrowing -Wno-conversion-null -fsanitize=address)
+add_link_options(-fsanitize=address)
 
 add_executable(${PROJECT_NAME} ${CPPS})
 
@@ -33,4 +34,4 @@ target_include_directories(${PROJECT_NAME} PRIVATE
                                                 "${PROJECT_SOURCE_DIR}/../external/dotenv-cpp/include/laserpants/dotenv")
 target_link_directories(${PROJECT_NAME} PRIVATE 
                                                 "${PROJECT_SOURCE_DIR}/../external/ctsa/Bin/")
-target_link_libraries(${PROJECT_NAME} pqxx armadillo ctsalib.a fmt laserpants::dotenv)
+target_link_libraries(${PROJECT_NAME} pqxx pq armadillo ctsalib.a fmt laserpants::dotenv)

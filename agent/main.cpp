@@ -25,10 +25,7 @@ int main(int argc, char** argv)
     std::signal(SIGTERM, handleExit);
     std::cout.setstate(std::ios_base::failbit);
 
-    if (setjmp(exitHandler))
-    {
-        return 0;
-    }
+
 
     dotenv::init(ENV_PATH);
     std::string connectionInfo;
@@ -52,6 +49,12 @@ int main(int argc, char** argv)
 
     pqxx::connection conn(connectionInfo);
     pqxx::nontransaction nonTr(conn);
+
+    if (setjmp(exitHandler))
+    {
+        conn.close();
+        return 0;
+    }
 
     Conversion conversion;
     Parse parse;
@@ -84,7 +87,9 @@ int main(int argc, char** argv)
         agentDatabase.addUserData(nonTr, userId, encodedActions, networkUsage);
         std::this_thread::sleep_for(std::chrono::milliseconds(10000));
     }
+
     
+    conn.close();
     return 0;
 }
 

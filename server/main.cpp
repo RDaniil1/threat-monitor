@@ -22,11 +22,6 @@ int main(int argc, char* argv[])
     std::signal(SIGTERM, handleExit);
     close(STDOUT_FILENO);
 
-    if (setjmp(exitHandler))
-    {
-        return 0;
-    }
-
     dotenv::init(ENV_PATH);
     std::string connectionInfo;
     if (DEVELOPER_MODE) 
@@ -45,6 +40,12 @@ int main(int argc, char* argv[])
 
     pqxx::connection conn(connectionInfo);
     pqxx::nontransaction nonTr(conn);
+
+    if (setjmp(exitHandler))
+    {
+        conn.close();
+        return 0;
+    }
 
     Database db(nonTr);
 
@@ -81,6 +82,8 @@ int main(int argc, char* argv[])
         }
         std::this_thread::sleep_for(std::chrono::milliseconds(60000));
     }
+
+    conn.close();
     
     return 0;
 }

@@ -16,7 +16,8 @@ file(GLOB
          CPPS "main.cpp"
               "${PROJECT_SOURCE_DIR}/src/**")
 
-add_compile_options(-Wno-ignored-attributes)
+add_compile_options(-Wno-ignored-attributes -fsanitize=address)
+add_link_options(-fsanitize=address)
 
 add_executable(${PROJECT_NAME} ${CPPS})
 
@@ -24,5 +25,5 @@ target_include_directories(${PROJECT_NAME} PRIVATE
                                                 "${PROJECT_SOURCE_DIR}/include"
                                                 "${PROJECT_SOURCE_DIR}/../external/dotenv-cpp/include/laserpants/dotenv")
                                                                                            
-target_link_libraries(${PROJECT_NAME} pqxx fmt ssl crypto laserpants::dotenv)
+target_link_libraries(${PROJECT_NAME} pqxx pq fmt ssl crypto laserpants::dotenv)
 
