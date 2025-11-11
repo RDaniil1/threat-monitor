@@ -25,8 +25,6 @@ int main(int argc, char** argv)
     std::signal(SIGTERM, handleExit);
     std::cout.setstate(std::ios_base::failbit);
 
-
-
     dotenv::init(ENV_PATH);
     std::string connectionInfo;
     std::string networkInterface;
