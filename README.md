@@ -2,6 +2,10 @@
 
 The internal threats monitoring system based on the network traffic and user activity prediction.
 
+> [!WARNING]
+
+> This program is a prototype, and used for showing basic functionality, not intended to be used in production.
+
 ## Contents
 
 1. [Algorithm](#1-algorithm)
@@ -42,7 +46,10 @@ sudo apt install \
   libcereal-dev \
   openssl \
   libfmt-dev \
-  libpqxx-dev
+  libpqxx-dev \
+  libgtest-dev \
+  libgmock-dev \
+  libmlpack-dev
 ```
 
 ### 3. Prerequisites
