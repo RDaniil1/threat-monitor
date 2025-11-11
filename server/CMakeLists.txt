@@ -1,6 +1,4 @@
-cmake_minimum_required(VERSION 3.30 FATAL_ERROR)
-
-project(Server LANGUAGES C CXX)
+set(EXEC_SERV_NAME server)
 
 find_package(fmt REQUIRED)
 find_package(Armadillo REQUIRED)
@@ -19,19 +17,19 @@ configure_file (config.hpp.in "${PROJECT_SOURCE_DIR}/include/config.hpp" @ONLY)
 file(
     GLOB
         CPPS "main.cpp" 
-        "${PROJECT_SOURCE_DIR}/src/**"
-        HEADERS "${PROJECT_SOURCE_DIR}/include")
+        "src/**")
 
-add_compile_options(-DUSE_ARMA -Wno-deprecated -Wno-narrowing -Wno-conversion-null -fsanitize=address)
-add_link_options(-fsanitize=address)
+add_compile_options(-fprofile-instr-generate -fcoverage-mapping -DUSE_ARMA -Wno-deprecated -Wno-narrowing -Wno-conversion-null -fsanitize=address)
+add_link_options(-fprofile-instr-generate -fcoverage-mapping -fsanitize=address)
 
-add_executable(${PROJECT_NAME} ${CPPS})
+add_executable(${EXEC_SERV_NAME} ${CPPS})
 
-target_include_directories(${PROJECT_NAME} PRIVATE 
-                                                "${PROJECT_SOURCE_DIR}/include"
-                                                "${PROJECT_SOURCE_DIR}/../external/ctsa/header"
-                                                "${PROJECT_SOURCE_DIR}/../external/ctsa/src"
-                                                "${PROJECT_SOURCE_DIR}/../external/dotenv-cpp/include/laserpants/dotenv")
-target_link_directories(${PROJECT_NAME} PRIVATE 
-                                                "${PROJECT_SOURCE_DIR}/../external/ctsa/Bin/")
-target_link_libraries(${PROJECT_NAME} pqxx pq armadillo ctsalib.a fmt laserpants::dotenv)
+target_include_directories(${EXEC_SERV_NAME} PRIVATE 
+                                                "include"
+                                                "${PROJECT_SOURCE_DIR}/external/mlpack/src/mlpack/core"
+                                                "${PROJECT_SOURCE_DIR}/external/ctsa/header"
+                                                "${PROJECT_SOURCE_DIR}/external/ctsa/src"
+                                                "${PROJECT_SOURCE_DIR}/external/dotenv-cpp/include/laserpants/dotenv")
+target_link_directories(${EXEC_SERV_NAME} PRIVATE 
+                                                "${PROJECT_SOURCE_DIR}/external/ctsa/Bin/")
+target_link_libraries(${EXEC_SERV_NAME} gcov pqxx pq armadillo ctsalib.a fmt laserpants::dotenv)
