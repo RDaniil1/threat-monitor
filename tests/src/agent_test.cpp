@@ -24,10 +24,16 @@ TEST(ConversionTest, PatternsCheck)
     ASSERT_THAT(encodedActions, ::testing::ElementsAreArray({ 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 })) << "Actions from database and founded ones are not equal";
 }
 
+TEST(ParseTest, NetworkInterfaceAvailabilityCheck) {
+    Parse parse;
+    auto networkUsage = parse.getNetworkUsage("invalid-interface");
+    ASSERT_EQ(networkUsage, -1.0f) << "Invalild network interface should't halt the program";
+}
+
 TEST(ParseTest, BasicFunctionalityCheck)
 {
     Parse parse;
-    auto networkUsage = parse.getNetworkUsage("wlan0");
+    auto networkUsage = parse.getNetworkUsage("wlo1");
     ASSERT_THAT(networkUsage, ::testing::Ge(0.0f)) << "Network usage can't be negative";
 
     auto machineId = parse.getMachineId();
@@ -61,4 +67,3 @@ TEST(ParseTest, EmptyCurrentActionsCheck)
     auto emptyCurrentActions = parse.getCurrentActions({});
     ASSERT_TRUE(emptyCurrentActions.empty()) << "Expected empty empty current actions";
 }
-
