@@ -6,8 +6,6 @@
 
 #include <gtest/gtest.h>
 
-#include <map>
-
 
 TEST(ArimaTest, EmptyCheck) 
 {
