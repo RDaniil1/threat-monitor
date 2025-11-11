@@ -25,6 +25,10 @@ std::vector<std::string> Parse::splitStringByNewline(const std::string& str)
 
 float Parse::getNetworkUsage(std::string networkInterface)
 {
+    if (!std::filesystem::exists("/sys/class/net/" + networkInterface)) {
+        return -1.0f;
+    }   
+
     std::string recCommand = fmt::format("cat /sys/class/net/{}/statistics/rx_bytes", networkInterface);
     std::string tranCommand = fmt::format("cat /sys/class/net/{}/statistics/tx_bytes", networkInterface);
 

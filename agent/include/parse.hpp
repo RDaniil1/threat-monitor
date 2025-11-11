@@ -10,6 +10,7 @@
 #include <ctime>
 #include <thread>
 #include <algorithm>
+#include <filesystem>
 
 #include "fmt/format.h"
 #include "fmt/ranges.h"
