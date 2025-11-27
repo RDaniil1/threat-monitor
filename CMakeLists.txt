@@ -14,3 +14,5 @@ add_subdirectory(monitor)
 include(CTest)
 enable_testing()
 add_subdirectory(tests)
+
+add_subdirectory(docs)
