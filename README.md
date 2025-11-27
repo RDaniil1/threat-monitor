@@ -87,3 +87,7 @@ A user interface visualizes the gathered and predicted users network traffic wit
 This program can be tested using unit tests, which are available in the folder *tests*. For launching it CTest and GTest must be installed on the operating system.
 
 For simulating malicious events auditd is needed to be installed and rules according to *malicious_events.sh* file, located in root folder to be created.
+
+## License
+
+This project is licensed under the BSD 3-Clause License. See the [LICENSE](LICENSE) file for details.
