@@ -24,5 +24,4 @@ target_include_directories(${EXEC_AGENT_NAME} PRIVATE
                                                 "include"
                                                 "${PROJECT_SOURCE_DIR}/external/dotenv-cpp/include/laserpants/dotenv")
                                                                                            
-target_link_libraries(${EXEC_AGENT_NAME} pq fmt ssl crypto laserpants::dotenv pqxx )
-
+target_link_libraries(${EXEC_AGENT_NAME} pq fmt ssl crypto laserpants::dotenv pqxx)

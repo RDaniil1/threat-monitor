@@ -1,3 +1,8 @@
+/*********************************************************************
+ * @file  conversion.cpp
+ * 
+ * @brief Implementation of the class Conversion.
+ *********************************************************************/
 #include "conversion.hpp"
 
 std::string Conversion::sha256(const std::string inputStr)

@@ -1,3 +1,8 @@
+/*********************************************************************
+ * @file  parse.cpp
+ * 
+ * @brief Implementation of the class Parse.
+ *********************************************************************/
 #include "parse.hpp"
 
 std::string Parse::executeCommand(const char* cmd) 

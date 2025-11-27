@@ -1,3 +1,8 @@
+/*********************************************************************
+ * @file  agentDatabase.cpp
+ * 
+ * @brief Implementation of the class AgentDatabase.
+ *********************************************************************/
 #include "agentDatabase.hpp"
 
 void AgentDatabase::addUserData(pqxx::nontransaction& nonTr, size_t userId, std::vector<size_t>& encodedActions, float networkUsage)
