@@ -1,3 +1,8 @@
+/*********************************************************************
+ * @file  mlp.cpp
+ * 
+ * @brief Implementation of the class Mlp.
+ *********************************************************************/
 #include "mlp.hpp"
 
 Mlp::Mlp(size_t gatheredAmount)
@@ -30,13 +35,14 @@ void Mlp::exec()
 {
     prepareData();
     setLayers();
-    setModelData();
+    train();
+    save();
 
     predict(trainData, trainPredictions);
     predict(testData, testPredictions);
 
-    printError("Train", trainPredictions, trainLabel);
-    printError("Test", testPredictions, testLabel);
+    printAccuracy("Train", trainPredictions, trainLabel);
+    printAccuracy("Test", testPredictions, testLabel);
 }
 
 void Mlp::prepareData()
@@ -59,20 +65,24 @@ void Mlp::setLayers()
     model.Add<ReLU>();
 }
 
-void Mlp::setModelData()
+void Mlp::train()
 {
     model.Train(trainData, trainLabel);
+}
+
+void Mlp::save()
+{
     data::Save(MODEL_PATH, "model", model, false);
 }
 
-void Mlp::printError(std::string errorMode, const arma::mat& predictedData, const arma::mat& expectedData)
+void Mlp::printAccuracy(std::string errorMode, const arma::mat& predictedData, const arma::mat& expectedData)
 {
     arma::umat _predictedData = arma::conv_to<arma::umat>::from(predictedData);
     arma::umat _expectedData = arma::conv_to<arma::umat>::from(expectedData);
 
     const double trainError = 
             arma::accu(_predictedData == _expectedData) * 1.0 / _expectedData.n_elem;
-    std::cout << errorMode << " error: " << trainError << '\n';
+    std::cout << errorMode << " accuracy: " << trainError << '\n';
 }
 
 void Mlp::predict(arma::mat& inputData, arma::mat& outputData)

@@ -1,3 +1,8 @@
+/*********************************************************************
+ * @file  arima.cpp
+ * 
+ * @brief Implementation of the class Arima.
+ *********************************************************************/
 #include "arima.hpp"
 
 Arima::Arima(size_t L, arma::rowvec networkUsage)

@@ -1,7 +1,16 @@
+/*********************************************************************
+ * @file  database.cpp
+ * 
+ * @brief Implementation of the class Database.
+ *********************************************************************/
 #include "database.hpp"
 
 Database::Database(pqxx::nontransaction& nonTr) 
 {
+    this->employeeAmount = -1;
+    this->employeeId = -1;
+    this->employeeViolationsAmount = -1;
+    
     this->nonTr = &nonTr;
     
     setEmployeesId();
@@ -71,19 +80,6 @@ arma::rowvec Database::parseEmployeeActions(size_t actionsIndex) const
         i++;
     }
 
-    // std::pair<pqxx::array_parser::juncture, std::string> elem;
-    // size_t i{};
-    // do
-    // {
-    //     elem = choosedActions.get_next();
-    //     if (elem.first == pqxx::array_parser::juncture::string_value)
-    //     {
-    //         parsedActions.col(i) = std::stod(elem.second);
-    //         ++i;
-    //     }
-    // }
-    // while (elem.first != pqxx::array_parser::juncture::done);
-
     return parsedActions;
 }
 
@@ -101,8 +97,7 @@ void Database::retrieveEmployeeActions()
 
 void Database::retrieveViolationsAmount()
 {
-    std::string query = fmt::format("SELECT SUM(violations_amount) FROM (SELECT (SELECT SUM(case b when '0' then 0 else 1 end) FROM unnest(actions) AS dt(b)) AS violations_amount FROM employee_data WHERE user_id = {} ORDER BY id DESC) AS limited_violations_amount;",
-    employeeId);
+    std::string query = fmt::format("SELECT SUM(violations_amount) FROM (SELECT (SELECT SUM(case b when '0' then 0 else 1 end) FROM unnest(actions) AS dt(b)) AS violations_amount FROM employee_data WHERE user_id = {} ORDER BY id DESC) AS limited_violations_amount;", employeeId);
     output = nonTr->exec(query);
     employeeViolationsAmount = output[0][0].as<int>();
 }
