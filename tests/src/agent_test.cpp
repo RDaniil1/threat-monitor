@@ -1,9 +1,13 @@
-#include "conversion.hpp"
-#include "parse.hpp"
-
+/*********************************************************************
+ * @file  agent_test.cpp
+ * 
+ * @brief Tests for agent module.
+ *********************************************************************/
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
+#include "conversion.hpp"
+#include "parse.hpp"
 
 TEST(ConversionTest, HashCheck) 
 {

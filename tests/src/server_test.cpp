@@ -1,11 +1,15 @@
+/*********************************************************************
+ * @file  server_test.cpp
+ * 
+ * @brief Tests for server module.
+ *********************************************************************/
+
+#include <gtest/gtest.h>
+#include "dotenv.h"
+
 #include "arima.hpp"
 #include "database.hpp"
 #include "mlp.hpp"
-
-#include "dotenv.h"
-
-#include <gtest/gtest.h>
-
 
 TEST(ArimaTest, EmptyCheck) 
 {
