@@ -37,7 +37,6 @@ Other external libraries can be installed using repository:
 sudo apt install \
   libqt6sql6-psql \
   libqt6charts6 \
-  cereal \
   libarmadillo-dev \
   libcereal-dev \
   openssl \
@@ -45,7 +44,9 @@ sudo apt install \
   libpqxx-dev \
   libgtest-dev \
   libgmock-dev \
-  libmlpack-dev
+  libmlpack-dev \
+  libcups2-dev \
+  qt6-charts-dev
 ```
 
 ### 3. Prerequisites
